@@ -72,7 +72,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
         printf("TCP destination Port    : %d\n", ntohs(th->tcp_dport));
 
         //output the right size message
-        u_char *message = (u_char *)(packet + sizeof(struct ethheader)) + (ip->iph_ihl * 4) + (((th)->tcp_offx2 & 0xf0) >> 4);
+        u_char *message = (u_char *)(packet + sizeof(struct ethheader)) + (ip->iph_ihl * 4) + (TH_OFF(th));
         printf("---------------------Message(16)----------------------\n");
         for (int i = 0; i < 100; i++) {
             if (i % 10 == 0 && i != 0) { printf("\n"); }
